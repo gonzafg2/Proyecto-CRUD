@@ -47,6 +47,10 @@
             <th scope="row">{{ item.id }}</th>
             <td>{{ item.correo }}</td>
             <td>{{ item.clave }}</td>
+            <td>
+              <button class="btn btn-secondary btn-sm mr-3">Editar</button>
+              <button class="btn btn-danger btn-sm">Eliminar</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -60,7 +64,7 @@ export default {
     return {
       correo: "",
       clave: "",
-      columnas: ["ID", "Correo Electrónico", "Contraseña"],
+      columnas: ["ID", "Correo Electrónico", "Contraseña", "Acciones"],
       usuarios: [
         {
           id: 1,
@@ -80,6 +84,16 @@ export default {
       ]
     };
   },
+  // mounted() {
+  //   if (localStorage.usuarios) {
+  //     this.usuarios = localStorage.usuarios;
+  //   }
+  // },
+  // // watch: {
+  // //   usuarios(newUsuarios) {
+  // //     localStorage.usuarios = newUsuarios;
+  // //   }
+  // // },
   methods: {
     // Método para ingresar nuevo usuario a tabla usuarios.
     submit() {
