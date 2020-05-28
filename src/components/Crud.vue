@@ -10,6 +10,7 @@
           class="form-control"
           placeholder="Escriba su correo electrónico"
           v-model="correo"
+          required
         />
       </div>
       <div class="form-group">
@@ -21,6 +22,7 @@
           class="form-control"
           placeholder="Escriba su contraseña"
           v-model="clave"
+          required
         />
       </div>
       <button class="btn btn-lg btn-success mr-5" type="submit">
