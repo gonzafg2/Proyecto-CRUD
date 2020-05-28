@@ -25,8 +25,15 @@
           required
         />
       </div>
-      <button class="btn btn-lg btn-success mr-5" type="submit">
+      <button
+        v-if="this.id == null"
+        class="btn btn-lg btn-success mr-5"
+        type="submit"
+      >
         Crear Usuario
+      </button>
+      <button v-else class="btn btn-lg btn-success mr-5" type="submit">
+        Actualizar Usuario
       </button>
       <button class="btn btn-lg btn-warning" type="reset">
         Limpiar
@@ -105,24 +112,38 @@ export default {
   methods: {
     // Método para ingresar nuevo usuario a tabla usuarios.
     submit() {
-      try {
-        // id del último usuario.
-        let usuarioUltimo = this.usuarios.length - 1;
-        let usuarioId = this.usuarios[usuarioUltimo].id;
-        let usuarioIdNuevo = usuarioId + 1;
+      // Crea un nuevo usuario.
+      if (this.id == null) {
+        try {
+          // id del último usuario.
+          let usuarioUltimo = this.usuarios.length - 1;
+          let usuarioId = this.usuarios[usuarioUltimo].id;
+          let usuarioIdNuevo = usuarioId + 1;
 
-        // Creo variable local como un objeto.
-        let usuarioNuevo = {
-          id: usuarioIdNuevo,
-          correo: this.correo,
-          clave: this.clave
-        };
-        // Ingreso objeto usuarioNuevo a usuarios.
-        this.usuarios.push(usuarioNuevo);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        (this.correo = ""), (this.clave = "");
+          // Creo variable local como un objeto.
+          let usuarioNuevo = {
+            id: usuarioIdNuevo,
+            correo: this.correo,
+            clave: this.clave
+          };
+          // Ingreso objeto usuarioNuevo a usuarios.
+          this.usuarios.push(usuarioNuevo);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          (this.correo = ""), (this.clave = "");
+        }
+      }
+      // Actualiza un usuario previo.
+      if (this.id !== null) {
+        try {
+          this.usuarios[this.id].correo = this.correo;
+          this.usuarios[this.id].clave = this.clave;
+        } catch (error) {
+          console.log(error);
+        } finally {
+          (this.correo = ""), (this.clave = "");
+        }
       }
     },
     // Método para limpiar datos de formulario.
@@ -131,7 +152,10 @@ export default {
     },
     // Actualizar usuario.
     editar(id) {
-      console.log(id);
+      // Visualizar datos en formulario.
+      this.id = id;
+      this.correo = this.usuarios[id].correo;
+      this.clave = this.usuarios[id].clave;
     },
     eliminar(id) {
       this.usuarios.splice(id, 1);
