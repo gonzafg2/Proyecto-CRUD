@@ -28,21 +28,19 @@
 export default {
   name: "Logeo",
   data(){ return{
+      usuarios:"",
     correo: "",
     clave:"",
     check:" ",
     validarCorreo:/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i,
    validarContraseña:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){7,15}$/,
-  usuarios:[{
-    
-  }],
-  
-  props: {
-    
+
+  }
   },
+
   methods: {
     Registrar(){
-if(this.validarCorreo.test(this.correo)==true){
+if (this.validarCorreo.test(this.correo)==true) {
     alert('¡Correo Exitoso!')
 }else{
     alert('Formato de Correo Invalido :(')
@@ -50,15 +48,12 @@ if(this.validarCorreo.test(this.correo)==true){
 if (this.validarContraseña.test(this.clave)==true) {
     alert('¡Contraseña Exitosa!')
 }else{
-    alert('Contraseña Insegura, Recuerda los parametros minimos que debe tener :)')
+    alert('Contraseña Insegura, Recuerda los parametros minimos que debe tener ')
 }
-if(this.correo !== this.clave){
-(this.validarContraseña.test(this.clave)==true)
-}else{
-  alert('La clave no puede ser igual al correo')}
-    }
-  }
-  }}
+
+    },
+  },
+  
 }
 
 
