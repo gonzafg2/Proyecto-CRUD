@@ -142,7 +142,7 @@ export default {
         } catch (error) {
           console.log(error);
         } finally {
-          (this.correo = ""), (this.clave = "");
+          (this.id = null), (this.correo = ""), (this.clave = "");
         }
       }
     },
