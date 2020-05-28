@@ -43,13 +43,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in usuarios" :key="item.id">
+          <tr v-for="(item, index) in usuarios" :key="index">
             <th scope="row">{{ item.id }}</th>
             <td>{{ item.correo }}</td>
             <td>{{ item.clave }}</td>
             <td>
-              <button class="btn btn-secondary btn-sm mr-3">Editar</button>
-              <button class="btn btn-danger btn-sm">Eliminar</button>
+              <button
+                @click="editar(index)"
+                class="btn btn-secondary btn-sm mr-3"
+              >
+                Editar
+              </button>
+              <button @click="eliminar(index)" class="btn btn-danger btn-sm">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
@@ -62,6 +69,7 @@
 export default {
   data() {
     return {
+      id: null,
       correo: "",
       clave: "",
       columnas: ["ID", "Correo Electrónico", "Contraseña", "Acciones"],
@@ -120,6 +128,13 @@ export default {
     // Método para limpiar datos de formulario.
     limpiar() {
       (this.correo = ""), (this.clave = "");
+    },
+    // Actualizar usuario.
+    editar(id) {
+      console.log(id);
+    },
+    eliminar(id) {
+      this.usuarios.splice(id, 1);
     }
   }
 };
