@@ -104,6 +104,7 @@ export default {
         nuevoUsuario,
       ]
       localStorage.setItem("usuarios", JSON.stringify(usuarios))
+      this.$router.push("/")
     },
     generarNuevoId: function() {
       let arrayUsuarios = JSON.parse(localStorage.getItem("usuarios"))
