@@ -40,7 +40,6 @@
             </th>
           </tr>
         </thead>
-
         <tbody>
           <tr v-for="item in usuarios" :key="item.id">
             <th scope="row">{{ item.id }}</th>
@@ -80,16 +79,34 @@ export default {
     };
   },
   methods: {
-    submit(){
-      console.log("hola");
+    // Método para ingresar nuevo usuario a tabla usuarios.
+    submit() {
+      try {
+        // id del último usuario.
+        let usuarioUltimo = this.usuarios.length - 1;
+        let usuarioId = this.usuarios[usuarioUltimo].id;
+        let usuarioIdNuevo = usuarioId + 1;
+
+        // Creo variable local como un objeto.
+        let usuarioNuevo = {
+          id: usuarioIdNuevo,
+          correo: this.correo,
+          clave: this.clave
+        };
+        // Ingreso objeto usuarioNuevo a usuarios.
+        this.usuarios.push(usuarioNuevo);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        (this.correo = ""), (this.clave = "");
+      }
     },
-    limpiar(){
+    // Método para limpiar datos de formulario.
+    limpiar() {
       (this.correo = ""), (this.clave = "");
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
