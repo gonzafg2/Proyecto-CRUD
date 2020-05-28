@@ -1,6 +1,6 @@
 <template>
   <div class="container" id="crud">
-    <form @submit.prevent="submit" action="" class="">
+    <form @submit.prevent="submit" @reset="limpiar" action="" class="">
       <div class="form-group">
         <label for="correo">Correo Electrónico</label>
         <input
@@ -30,6 +30,26 @@
         Limpiar
       </button>
     </form>
+
+    <section class="usuarios mt-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" v-for="item in columnas" :key="item.id">
+              {{ item }}
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="item in usuarios" :key="item.id">
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.correo }}</td>
+            <td>{{ item.clave }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </div>
 </template>
 
@@ -38,12 +58,33 @@ export default {
   data() {
     return {
       correo: "",
-      clave: ""
+      clave: "",
+      columnas: ["ID", "Correo Electrónico", "Contraseña"],
+      usuarios: [
+        {
+          id: 1,
+          correo: "gonzafg2@gmail.com",
+          clave: "holahola"
+        },
+        {
+          id: 2,
+          correo: "gonzafg2@hotmail.com",
+          clave: "helloworld"
+        },
+        {
+          id: 3,
+          correo: "gfleming@flemingtech.us",
+          clave: "frijol"
+        }
+      ]
     };
   },
   methods: {
     submit(){
       console.log("hola");
+    },
+    limpiar(){
+      (this.correo = ""), (this.clave = "");
     }
   }
 };
