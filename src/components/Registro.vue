@@ -104,6 +104,7 @@ export default {
         nuevoUsuario,
       ]
       localStorage.setItem("usuarios", JSON.stringify(usuarios))
+      alert("Registro completo. Ahora puedes iniciar sesión.")
       this.$router.push("/")
     },
     generarNuevoId: function() {
