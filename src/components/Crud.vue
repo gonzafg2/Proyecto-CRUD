@@ -148,7 +148,7 @@ export default {
     },
     // Método para limpiar datos de formulario.
     limpiar() {
-      (this.correo = ""), (this.clave = "");
+      (this.id = null), (this.correo = ""), (this.clave = "");
     },
     // Actualizar usuario.
     editar(id) {
