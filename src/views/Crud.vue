@@ -57,7 +57,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="this.usuarios !== []">
           <tr v-for="(item, index) in usuarios" :key="index">
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ item.correo }}</td>
@@ -73,6 +73,11 @@
                 Eliminar
               </button>
             </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="pt-4" colspan="4">Sin información disponible.</td>
           </tr>
         </tbody>
       </table>
@@ -100,7 +105,7 @@ export default {
     leer() {
       let dataLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
       if (dataLocalStorage !== null) {
-        dataLocalStorage.forEach((elemento) => {
+        dataLocalStorage.forEach(elemento => {
           this.usuarios.push(elemento);
         });
       }
@@ -113,7 +118,7 @@ export default {
           // Creo variable local como un objeto.
           let usuarioNuevo = {
             correo: this.correo,
-            clave: this.clave
+            clave: this.clave,
           };
           // Insertar nuevo usuario en tabla usuarios.
           this.usuarios.push(usuarioNuevo);
@@ -147,15 +152,18 @@ export default {
       this.correo = this.usuarios[id].correo;
       this.clave = this.usuarios[id].clave;
     },
-    // Eliminar usuario en tabla.
+    // Eliminar usuario.
     eliminar(id) {
+      // Eliminar en tabla de usuarios.
       this.usuarios.splice(id, 1);
+      // Eliminar en LocalStorage.
+      localStorage.usuarios = JSON.stringify(this.usuarios);
     },
     // Limpiar datos de formulario.
     limpiar() {
       (this.id = null), (this.correo = ""), (this.clave = "");
-    }
-  }
+    },
+  },
 };
 </script>
 
