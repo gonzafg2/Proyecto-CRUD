@@ -57,7 +57,7 @@
             </th>
           </tr>
         </thead>
-        <tbody v-if="this.usuarios !== []">
+        <tbody v-if="this.usuarios.length !== 0">
           <tr v-for="(item, index) in usuarios" :key="index">
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ item.correo }}</td>
@@ -75,9 +75,9 @@
             </td>
           </tr>
         </tbody>
-        <tbody>
+        <tbody v-else>
           <tr>
-            <td class="pt-4" colspan="4">Sin información disponible.</td>
+            <td colspan="4">Sin información disponible.</td>
           </tr>
         </tbody>
       </table>
