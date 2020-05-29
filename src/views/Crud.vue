@@ -1,7 +1,7 @@
 <template>
   <div class="container" id="crud">
     <form
-      @submit.prevent="submit"
+      @submit.prevent="crear"
       @reset="limpiar"
       class="d-flex justify-content-between align-items-center"
     >
@@ -12,7 +12,7 @@
           name=""
           id="correoId"
           class="form-control"
-          placeholder="Escriba su correo electrónico"
+          placeholder="Escriba su correo"
           v-model="correo"
           required
         />
@@ -59,12 +59,12 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in usuarios" :key="index">
-            <th scope="row">{{ item.id }}</th>
+            <th scope="row">{{ index + 1 }}</th>
             <td>{{ item.correo }}</td>
             <td>{{ item.clave }}</td>
             <td>
               <button
-                @click="editar(index)"
+                @click="actualizar(index)"
                 class="btn btn-secondary btn-sm mr-3"
               >
                 Editar
@@ -87,55 +87,39 @@ export default {
       id: null,
       correo: "",
       clave: "",
-      columnas: ["ID", "Correo Electrónico", "Contraseña", "Acciones"],
-      usuarios: [
-        {
-          id: 1,
-          correo: "gonzafg2@gmail.com",
-          clave: "holahola"
-        },
-        {
-          id: 2,
-          correo: "gonzafg2@hotmail.com",
-          clave: "helloworld"
-        },
-        {
-          id: 3,
-          correo: "gfleming@flemingtech.us",
-          clave: "frijol"
-        }
-      ]
+      columnas: ["#", "Correo Electrónico", "Contraseña", "Acciones"],
+      usuarios: []
     };
   },
-  // mounted() {
-  //   if (localStorage.usuarios) {
-  //     this.usuarios = localStorage.usuarios;
-  //   }
-  // },
-  // // watch: {
-  // //   usuarios(newUsuarios) {
-  // //     localStorage.usuarios = newUsuarios;
-  // //   }
-  // // },
+  created() {
+    // Leer datos del Local Storage para renderizarlos en la tabla.
+    this.leer();
+  },
   methods: {
-    // Método para ingresar nuevo usuario a tabla usuarios.
-    submit() {
+    // Leer datos del Local Storage para renderizarlos en la tabla.
+    leer() {
+      let dataLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
+      if (dataLocalStorage !== null) {
+        dataLocalStorage.forEach((elemento) => {
+          this.usuarios.push(elemento);
+        });
+      }
+    },
+    // Ingresar nuevo usuario a tabla usuarios.
+    crear() {
       // Crea un nuevo usuario.
       if (this.id == null) {
         try {
-          // id del último usuario.
-          let usuarioUltimo = this.usuarios.length - 1;
-          let usuarioId = this.usuarios[usuarioUltimo].id;
-          let usuarioIdNuevo = usuarioId + 1;
-
           // Creo variable local como un objeto.
           let usuarioNuevo = {
-            id: usuarioIdNuevo,
             correo: this.correo,
-            clave: this.clave
+            clave: this.clave,
           };
-          // Ingreso objeto usuarioNuevo a usuarios.
+          // Insertar nuevo usuario en tabla usuarios.
           this.usuarios.push(usuarioNuevo);
+
+          // Guardar nuevo usuario en LocalStorage
+          localStorage.setItem("usuarios", JSON.stringify(this.usuarios));
         } catch (error) {
           console.log(error);
         } finally {
@@ -145,8 +129,16 @@ export default {
       // Actualiza un usuario previo.
       if (this.id !== null) {
         try {
+          // Inserta datos actualizados en tabla Usuarios
           this.usuarios[this.id].correo = this.correo;
           this.usuarios[this.id].clave = this.clave;
+
+          // Guarda datos actualizados en LocalStorage
+          // localStorage.setItem("usuarios", JSON.stringify(this.correo));
+          // localStorage.usuarios[this.id].clave = this.clave;
+
+          // let usr = localStorage.getItem("usuarios");
+          // console.log(usr);
         } catch (error) {
           console.log(error);
         } finally {
@@ -154,17 +146,18 @@ export default {
         }
       }
     },
-    // Método para limpiar datos de formulario.
+    // Limpiar datos de formulario.
     limpiar() {
       (this.id = null), (this.correo = ""), (this.clave = "");
     },
     // Actualizar usuario.
-    editar(id) {
+    actualizar(id) {
       // Visualizar datos en formulario.
       this.id = id;
       this.correo = this.usuarios[id].correo;
       this.clave = this.usuarios[id].clave;
     },
+    // Eliminar usuario en tabla.
     eliminar(id) {
       this.usuarios.splice(id, 1);
     }
@@ -172,4 +165,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+form {
+  button {
+    border-radius: 25px;
+  }
+}
+table {
+  button {
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+</style>
