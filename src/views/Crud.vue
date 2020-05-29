@@ -1,7 +1,11 @@
 <template>
   <div class="container" id="crud">
-    <form @submit.prevent="submit" @reset="limpiar" action="" class="">
-      <div class="form-group">
+    <form
+      @submit.prevent="submit"
+      @reset="limpiar"
+      class="d-flex justify-content-between align-items-center"
+    >
+      <div class="form-group w-75">
         <label for="correo">Correo Electrónico</label>
         <input
           type="email"
@@ -13,7 +17,7 @@
           required
         />
       </div>
-      <div class="form-group">
+      <div class="form-group w-75 mx-3">
         <label for="correo">Contraseña</label>
         <input
           type="text"
@@ -27,15 +31,19 @@
       </div>
       <button
         v-if="this.id == null"
-        class="btn btn-lg btn-success mr-5"
+        class="btn btn-md btn-success w-50 mx-3 mt-3"
         type="submit"
       >
         Crear Usuario
       </button>
-      <button v-else class="btn btn-lg btn-success mr-5" type="submit">
+      <button
+        v-else
+        class="btn btn-md btn-success w-50 mx-3 mt-3"
+        type="submit"
+      >
         Actualizar Usuario
       </button>
-      <button class="btn btn-lg btn-warning" type="reset">
+      <button class="btn btn-md btn-warning w-50 mt-3" type="reset">
         Limpiar
       </button>
     </form>
