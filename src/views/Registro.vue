@@ -106,6 +106,7 @@ export default {
       localStorage.setItem("usuarios", JSON.stringify(usuarios))
       alert("Registro completo. Ahora puedes iniciar sesión.")
       this.$router.push("/")
+       
     },
     generarNuevoId: function() {
       let arrayUsuarios = JSON.parse(localStorage.getItem("usuarios"))
@@ -116,6 +117,7 @@ export default {
         return 0
       }
     },
+   
   },
 }
 </script>
