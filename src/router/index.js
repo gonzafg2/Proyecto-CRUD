@@ -6,6 +6,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    redirect: {
+      name: "Logeo"
+    }
+  },
+  {
+    path: "/",
     name: "Logeo",
     component: () =>
       import(/* webpackChunkName: "logeo" */ "../views/Logeo.vue")
