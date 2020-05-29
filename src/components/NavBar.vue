@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand mr-md-5" href="/"
+    <a class="navbar-brand" href="/"
       ><img src="../assets/logo.png" alt="Logo Vue" /> Proyecto CRUD VueJS</a
     >
     <button
@@ -21,7 +21,7 @@
             ><a class="nav-link active" href="#">Acceder</a></router-link
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-md-4">
           <router-link to="/registro"
             ><a class="nav-link active" href="#">Registro</a></router-link
           >

@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12">
+    <div
+      class="contenedor-central container d-flex justify-content-center align-items-center"
+    >
+      <div class="row w-100">
+        <div class="col">
           <router-view></router-view>
         </div>
       </div>
@@ -24,5 +26,8 @@ export default {
 <style lang="scss">
 #app {
   text-align: center;
+}
+.contenedor-central {
+  height: 80vh;
 }
 </style>
