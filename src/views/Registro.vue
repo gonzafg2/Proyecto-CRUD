@@ -51,9 +51,7 @@
 
 <script>
 const regexCorreo = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-const regexClave = new RegExp(
-  "^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])))(?=.{7,12})"
-)
+const regexClave = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){7,12}$/
 
 export default {
   name: "Registro",
@@ -75,7 +73,14 @@ export default {
             console.log("Clave cumple regex")
             if (this.clave === this.clave2) {
               console.log("Claves coinciden")
-              this.registrar()
+              if (this.usuarioEnClave()) {
+                console.log("No está nombre usuario en clave")
+                this.registrar()
+              } else {
+                alert(
+                  "Su contraseña no puede incluir el nombre de usuario de su correo"
+                )
+              }
             } else {
               alert("Las contraseñas no coinciden")
             }
@@ -114,6 +119,14 @@ export default {
         return idUltimoUsuario + 1
       } else {
         return 0
+      }
+    },
+    usuarioEnClave: function() {
+      let usuario = this.correo.split("@")[0]
+      if (this.clave.includes(usuario)) {
+        return true
+      } else {
+        return false
       }
     },
   },
