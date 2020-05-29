@@ -113,11 +113,10 @@ export default {
           // Creo variable local como un objeto.
           let usuarioNuevo = {
             correo: this.correo,
-            clave: this.clave,
+            clave: this.clave
           };
           // Insertar nuevo usuario en tabla usuarios.
           this.usuarios.push(usuarioNuevo);
-
           // Guardar nuevo usuario en LocalStorage
           localStorage.setItem("usuarios", JSON.stringify(this.usuarios));
         } catch (error) {
@@ -132,23 +131,14 @@ export default {
           // Inserta datos actualizados en tabla Usuarios
           this.usuarios[this.id].correo = this.correo;
           this.usuarios[this.id].clave = this.clave;
-
-          // Guarda datos actualizados en LocalStorage
-          // localStorage.setItem("usuarios", JSON.stringify(this.correo));
-          // localStorage.usuarios[this.id].clave = this.clave;
-
-          // let usr = localStorage.getItem("usuarios");
-          // console.log(usr);
+          // Actualizar en LocalStorage como STRING.
+          localStorage.usuarios = JSON.stringify(this.usuarios);
         } catch (error) {
           console.log(error);
         } finally {
           (this.id = null), (this.correo = ""), (this.clave = "");
         }
       }
-    },
-    // Limpiar datos de formulario.
-    limpiar() {
-      (this.id = null), (this.correo = ""), (this.clave = "");
     },
     // Actualizar usuario.
     actualizar(id) {
@@ -160,6 +150,10 @@ export default {
     // Eliminar usuario en tabla.
     eliminar(id) {
       this.usuarios.splice(id, 1);
+    },
+    // Limpiar datos de formulario.
+    limpiar() {
+      (this.id = null), (this.correo = ""), (this.clave = "");
     }
   }
 };
